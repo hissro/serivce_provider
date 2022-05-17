@@ -271,6 +271,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
     );
   }
 
+
   @override
   Widget build(BuildContext context)
   {
@@ -284,7 +285,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
           TopContainer(
             image: BusinessInfo.bus_logo,
-            height: 220,
+            height: 200,
             width: width,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -401,7 +402,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,
-        height: 60.0,
+        height: 75.0,
         items: const <Widget>[
           Icon(
             Icons.home,
@@ -442,9 +443,10 @@ class _BusinessDetailsState extends State<BusinessDetails>
         letIndexChange: (index) => true,
       ),
       drawer: MyDrawer(),
-
     );
   }
+
+
 
 
 

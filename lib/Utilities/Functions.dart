@@ -17,12 +17,12 @@ void showAlertDialog(BuildContext context, String message)
 {
   // set up the AlertDialog
   final CupertinoAlertDialog alert = CupertinoAlertDialog(
-    title:  Text(  'app.Error'.tr  , style: TextStyle( fontFamily: Constants.Noura , color: kSecondaryColor),),
+    title:  Text(  'خطا'.tr  , style: TextStyle( fontFamily: Constants.Noura , color: kSecondaryColor),),
     content: Text('\n$message \n\n' , style: TextStyle( fontFamily: Constants.Noura , ),),
     actions: <Widget>[
       CupertinoDialogAction(
         isDefaultAction: true,
-        child:  Text( 'app.Ok'.tr , style: TextStyle( fontFamily: Constants.Noura , ), ),
+        child:  Text( 'موافق'.tr , style: TextStyle( fontFamily: Constants.Noura , ), ),
         onPressed: () {
           Navigator.of(context).pop();
         },

@@ -408,14 +408,16 @@ class _BusinessState extends State<Business>
                                           Center(
                                             child: Container(
                                               padding:const EdgeInsets.only(right: 15 , left: 15 ,top: 15   ) ,
-                                              child: Text(
-                                                info.bus_title,
-                                                // textAlign: TextAlign.right,
-                                                style: const TextStyle(
-                                                    fontFamily: 'noura',
-                                                    fontSize: 24,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold
+                                              child: Expanded(
+                                                child: Text(
+                                                  info.bus_title,
+                                                  // textAlign: TextAlign.right,
+                                                  style:   TextStyle(
+                                                      fontFamily: 'noura',
+                                                      fontSize: 24,
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
                                                 ),
                                               ),
                                             ),

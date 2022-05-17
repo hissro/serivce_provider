@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen>
               ),
               SizedBox(height: 25,),
               Text(
-                 ('app.Login').tr,
+                 ('تسجيل دخول').tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen>
                   obscureText: _obscureText,
                   cursorColor: KBlack,
                   decoration: InputDecoration(
-                    hintText:  ('app.password').tr,
+                    hintText:  ('كلمة المرور').tr,
                     hintStyle: TextStyle(fontFamily: 'noura'),
                     icon: Icon(
                       Icons.lock,
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen>
 
 
               RoundedButton(
-                text:  ('app.Login').tr,
+                text:  ('دخول').tr,
                 press: () {
                   setState(()
                   {
@@ -278,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen>
             {
               isLogin = false;
             });
-            showAlertDialog(context,  ('app.connection_erro').tr);
+            showAlertDialog(context,  ('connection_erro').tr);
           });
           
         }
@@ -288,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen>
             {
               isLogin = false;
             });
-            showAlertDialog(context,  ('app.password_require').tr);
+            showAlertDialog(context,  ('password_require').tr);
           }
       } else
         {
@@ -296,7 +296,7 @@ class _LoginScreenState extends State<LoginScreen>
         {
           isLogin = false;
         });
-        showAlertDialog(context, ('app.nID_require').tr);
+        showAlertDialog(context, ('nID_require').tr);
       }
     }
 

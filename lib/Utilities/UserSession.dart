@@ -7,8 +7,9 @@ class UserSession extends GetxController
 {
   final session = GetStorage();
   bool IsLogin = false ;
-  String title = "AWEZO";
-  String subtitle = "AWEZO";
+  String title = "اويزو";
+  String subtitle = "ايزو للخدمات";
+  String profilepc = "assets/images/logo.png";
 
   var user ;
 
@@ -20,10 +21,15 @@ class UserSession extends GetxController
     super.onInit();
 
     IsLogin =  session.read("IsLogin") == null ?  false : session.read("IsLogin");
-    user = getUserInfo();
 
-    title =  IsLogin ?  session.read("user_fullname") : "AWEZO";
-    subtitle =  IsLogin ?  session.read("user_email") : "ايزو للخدمات";
+
+    if (IsLogin)
+    {
+      user = getUserInfo();
+      title = IsLogin ? session.read("user_fullname") : "AWEZO";
+      subtitle = IsLogin ? session.read("user_email") : "ايزو للخدمات";
+      profilepc = "assets/images/profile.png";
+    }
   }
 
 
@@ -41,7 +47,7 @@ class UserSession extends GetxController
 
   Future<UserModel> getUserInfo() async
    {
-     print ('Data Save it to session ');
+     print ('get User Info ');
      return UserModel(
          user_id:  session.read("user_id"),
          user_fullname: session.read("user_fullname"),

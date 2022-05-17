@@ -32,10 +32,10 @@ class Constants
   static Color primery = kPrimaryColor ;
   static Color secondary = kSecondaryColor ;
 
-  static String SLIDER_HEADING_1 = " التطوع ";
+  static String SLIDER_HEADING_1 = " اويزو ";
   static String SLIDER_DESC1 = " الأيادي الناعمة تحب عمل الخير للغير، من يعمل دوماً ما يريد، يعمل نادراً ما يجب. ";
 
-  static String SLIDER_HEADING_2 = "  لماذا نتطوع؟ ";
+  static String SLIDER_HEADING_2 = "  لماذا اويزو؟ ";
   static String SLIDER_DESC2 = "يعد التطوع خيارًا رائعًا عندما يتعلق الأمر بتزويد نفسك بفرصة جديدة في مجالات مختلفة من الحياة التي تمنحك القدرة على مقابلة أشخاص جدد وتوسيع جهات الاتصال الخاصة بك ومساعدتك في الخروج من منطقة راحتك، مما يجعلك أكثر ثقة ويزيد من مهاراتك الاجتماعية وقدرتك على التواصل الفعّال مع محيطك.";
 
   static String SLIDER_HEADING_3 = " يوسع افاقك ";

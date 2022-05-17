@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.hissro.serivce">
    <application
-        android:label="serivce"
+        android:label="اويزو"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyAEz9TnbjvxPlL-cTkqTg85rmRPqn3UXas"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
