@@ -3,6 +3,7 @@ import 'package:serivce/DataModels/UserModel.dart';
 import 'package:serivce/Login/components/text_field_container.dart';
 import 'package:serivce/Utilities/Config.dart';
 import 'package:serivce/Utilities/Functions.dart';
+import 'package:serivce/Utilities/UserSession.dart';
 import 'package:serivce/Utilities/constants.dart';
 import 'package:serivce/Utilities/network_util.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:serivce/Login/Screens/Signup/signup_screen.dart';
 import 'package:serivce/Login/components/already_have_an_account_acheck.dart';
 import 'package:serivce/Login/components/rounded_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../../Categories/Categories.dart';
   
 
 class LoginScreen extends StatefulWidget
@@ -27,7 +30,7 @@ class LoginScreen extends StatefulWidget
 class _LoginScreenState extends State<LoginScreen>
 {
 
-
+  UserSession UControl = Get.put(UserSession()) ;
   NetworkUtil _netUtil = new NetworkUtil();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -255,9 +258,14 @@ class _LoginScreenState extends State<LoginScreen>
                 if (res["responce"])
                   {
                     UserModel user = UserModel.fromJson(res["data"]);
-                    // StorageUtil.saveLogin(user);
+
+                    UControl.SetUserInfo(user);
+
                     showSuccessful(context, ' مرحب بكــ :  ${user.user_fullname}');
-                    Navigator.of(context).pushReplacementNamed('Categories');
+                    Future.delayed(const Duration(seconds: 3), ()
+                    {
+                      Get.offAll( ()=> Categories());
+                    });
                   }
                 else
                   {

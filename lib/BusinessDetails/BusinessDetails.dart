@@ -647,7 +647,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                                      Center(
                                        child: Text(
-                                         'app.Loading'.tr,
+                                         'Loading'.tr,
                                          style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
                                        ),
                                      ),
@@ -704,7 +704,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                                        Center(
                                          child: Text(
-                                            'app.error'.tr,
+                                            'error'.tr,
                                            style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
                                          ),
                                        ),
@@ -799,7 +799,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                                           Center(
                                             child: Text(
-                                                 'app.no_offer'.tr,
+                                                 'no_offer'.tr,
                                               style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
                                             ),
                                           ),
@@ -1429,7 +1429,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                             var info = snapshot.data![index];
 
 
-                            var discount =   int.parse(info.service_discount) == 0 ? '' :  "   (%${info.service_discount} ${'app.discount'.tr})  ";
+                            var discount =   int.parse(info.service_discount) == 0 ? '' :  "   (%${info.service_discount} ${'خصم'.tr})  ";
 
                             // print ('discount  :${discount}');
 
@@ -1477,7 +1477,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                                     _services = snapshot.data! ;
                                   });
                                 },
-                                secondary: Text (   info.toutal.toString()+ " "+ 'app.currency'.tr  , style: const TextStyle(fontFamily: 'noura' , fontSize: 14),),
+                                secondary: Text (   info.toutal.toString()+ " "+ 'ريال'.tr  , style: const TextStyle(fontFamily: 'noura' , fontSize: 14),),
 
                                 /*
                                   secondary: CircleAvatar(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:serivce/Utilities/UserSession.dart';
+import 'package:serivce/Utilities/translations/AppLanguage.dart';
 
+import '../Categories/Categories.dart';
 import '../Login/Screens/Login/login_screen.dart';
 import '../Utilities/constants.dart';
 
@@ -14,10 +17,12 @@ class MyDrawer extends StatefulWidget
 class _MyDrawerState extends State<MyDrawer>
 {
 
-  var IsLogin = false ;
-  // UserModel ? User ;
+  UserSession UserInfo = Get.put(UserSession()) ;
+  var appLang = Get.put(AppLanguage());
 
-  final bool _RTL = true;
+  var title = "AWEZO";
+
+  // appLang.RTL
 
 
   @override
@@ -27,6 +32,9 @@ class _MyDrawerState extends State<MyDrawer>
     super.initState();
     _getuser();
     _getLang ();
+    setState(() {
+      title = UserInfo.title;
+    });
 
 
   }
@@ -83,11 +91,9 @@ class _MyDrawerState extends State<MyDrawer>
 
     
     return
-
       ClipRRect(
-
           borderRadius:
-        _RTL == true ?  const BorderRadius.only(
+          appLang.RTL == true ?  const BorderRadius.only(
           topLeft: Radius.circular(40),
           bottomLeft: Radius.circular(220),
         ):  const BorderRadius.only(
@@ -105,7 +111,7 @@ class _MyDrawerState extends State<MyDrawer>
               [
 
 
-                const UserAccountsDrawerHeader
+                  UserAccountsDrawerHeader
                   (
                   decoration : BoxDecoration(
                     // color: Colors.blueGrey,
@@ -116,10 +122,8 @@ class _MyDrawerState extends State<MyDrawer>
                   ),
 
 
-
-
-                  accountEmail: Text(   "في كل مكان " , style: TextStyle(fontFamily: 'noura'  ,color: Colors.white , fontSize: 12) ), //home_info.bus_email
-                   accountName: Text(   "إليجانزا " ,   style: TextStyle(fontFamily: 'noura' , color: Colors.white  , fontSize: 18 , fontWeight: FontWeight.bold)  ), //home_info.bus_title
+                  accountEmail: Text( UserInfo.subtitle , style: TextStyle(fontFamily: 'noura'  ,color: Colors.white , fontSize: 12) ), //home_info.bus_email
+                   accountName: Text(  UserInfo.title ,   style: TextStyle(fontFamily: 'noura' , color: Colors.white  , fontSize: 18 , fontWeight: FontWeight.bold)  ), //home_info.bus_title
                   currentAccountPicture: CircleAvatar(
                     radius: 30.0,
                     backgroundImage:  AssetImage("assets/images/profile.png"),
@@ -140,7 +144,7 @@ class _MyDrawerState extends State<MyDrawer>
                 ),
 
 
-                !IsLogin ?   ListTile(
+                !UserInfo.IsLogin ?   ListTile(
                   leading: const Icon(Icons.lock, color: kPrimaryColor),
                   title: const Text( ('دخول'),
                       style: TextStyle(fontFamily: 'noura')),
@@ -154,7 +158,7 @@ class _MyDrawerState extends State<MyDrawer>
                 ): Container(),
 
 
-                IsLogin   ?
+                UserInfo.IsLogin ?
                 ListTile(
                   leading: const Icon(Icons.person , color: kPrimaryColor,),
                   title: const Text(('الملف الشخصي') ,style: TextStyle(fontFamily: 'noura')),
@@ -164,7 +168,7 @@ class _MyDrawerState extends State<MyDrawer>
                 ) :Container(),
 
 
-                IsLogin   ?
+                UserInfo.IsLogin   ?
                 ListTile(
                   leading: const Icon(Icons.favorite_border , color: kPrimaryColor,),
                   title: const Text(('طلباتي') ,style: TextStyle(fontFamily: 'noura')),
@@ -191,7 +195,7 @@ class _MyDrawerState extends State<MyDrawer>
                 ),
 
 
-                IsLogin   ?
+                UserInfo.IsLogin   ?
                 ListTile(
                   leading: const Icon(Icons.lock, color: kPrimaryColor),
                   title: const Text( ('خروج'),
@@ -199,15 +203,12 @@ class _MyDrawerState extends State<MyDrawer>
                   onTap: ()
                   {
 
-                    // StorageUtil.Loginout().then((value)
-                    // {
-                    //   setState(()
-                    //   {
-                    //     IsLogin = false;
-                    //
-                    //     Navigator.pushReplacementNamed(context, Categories.routeName);
-                    //   });
-                    // });
+                    UserInfo.LogOut();
+                    Get.offAll(()=> Categories());
+
+
+
+
                   },
                 ) : Container(),
 

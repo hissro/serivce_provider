@@ -1,9 +1,7 @@
 
+class UserModel
+{
 
-
-class UserModel{
-
-  // user_id: 14, user_fullname: salah omer, user_email: hissro@gmail.com, user_phone: 0564899833
 
   final String user_id;
   final String user_fullname;
@@ -17,7 +15,7 @@ class UserModel{
         required this.user_fullname,
         required this.user_email,
         required this.user_phone,
-        required this.IsLogin
+        required this.IsLogin, required
       });
 
   factory UserModel.fromJson(Map<String, dynamic> json)

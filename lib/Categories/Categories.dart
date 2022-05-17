@@ -323,7 +323,7 @@ class _CategoriesState extends State<Categories>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: const Text('اليجانزا', style: TextStyle(fontFamily: 'noura'),),
+        title: const Text('الاقسام', style: TextStyle(fontFamily: 'noura'),),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
