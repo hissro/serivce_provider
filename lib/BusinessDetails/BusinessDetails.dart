@@ -393,11 +393,8 @@ class _BusinessDetailsState extends State<BusinessDetails>
                 ]),
           ),
 
-
-
           /********************************************************************/
           get_page(_page),
-
           /********************************************************************/
         ],
       ),
@@ -601,13 +598,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
           [
 
 
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: subheading(' العروض   ' ,),
-              ),
-
-
-
                FutureBuilder(
               future:  _FuturePhotos,
               builder: (BuildContext context, AsyncSnapshot<List<PhotosModel>> snapshot)
@@ -616,7 +606,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                 switch (snapshot.connectionState)
                 {
-                  case ConnectionState.waiting:
+                     case ConnectionState.waiting:
                      {
                          return Container(
                          margin: const EdgeInsets.only(top: 60),
@@ -732,24 +722,44 @@ class _BusinessDetailsState extends State<BusinessDetails>
                     else
                       {
 
-
                         if (snapshot.data!.isNotEmpty )
                         {
-                          return ListView.builder(
-                            // here we use our demo procuts list
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                var info = snapshot.data![index];
+                          return SingleChildScrollView(
+                            child: Column(
+                              children:
+                              [
 
-                                return ProductCard(
-                                  itemIndex: index,
-                                  product: info,
-                                  press: () {},
-                                );
-                              }
+                                Row(
+                                  children:
+                                  [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: subheading(' العروض   ' ,),
+                                    ),
+                                  ],
+                                ),
+
+
+                                ListView.builder(
+                                    shrinkWrap: true ,
+                                    physics: ScrollPhysics(),
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (context, index)
+                                    {
+                                      var info = snapshot.data![index];
+
+                                      return ProductCard(
+                                        itemIndex: index,
+                                        product: info,
+                                        press: () {},
+                                      );
+                                    }
+                                ),
+                              ],
+                            ),
                           );
                         }else
-                          {
+                         {
                             return Container(
                               margin: const EdgeInsets.only(top: 60),
                               padding: const EdgeInsets.only(right: 15, left: 15),
@@ -814,6 +824,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                           style: Theme.of(context).textTheme.button,
                         ),
                       ),*/
+
                                         ],
                                       ),
                                     ),
@@ -822,7 +833,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
                               ),
                             );
                           }
-                     //
                     }
                 }
               },
@@ -840,7 +850,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   Widget Tab4()
   {
-    Size size = MediaQuery.of(context).size;
 
     return  Expanded(
       child: SingleChildScrollView(
@@ -895,7 +904,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>
                                 [
-
                                   CircleAvatar(
                                     radius: 30.0,
                                     backgroundColor: Colors.transparent,
@@ -914,9 +922,8 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-
-
+                                    children: <Widget>
+                                    [
                                       RatingBarIndicator(
                                         rating: double.parse(info.ratings),
                                         itemBuilder: (context, index) => Icon(
@@ -939,9 +946,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
                                         ),
                                       ),
 
-
-
-
                                        Text(
                                         info.user_fullname,
                                         style: const TextStyle(
@@ -950,6 +954,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black45),
                                       ),
+
                                     ],
                                   )
                                 ],
@@ -970,6 +975,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       }
                     },
                   ),
+
                 ],
               ),
             ),
@@ -1202,7 +1208,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   Widget Tab2()
   {
-    Size size = MediaQuery.of(context).size;
 
     return  Expanded(
       child: SingleChildScrollView(
@@ -1284,7 +1289,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
                     ],
                   ),
 
-
                   /*
                   Html(
                     data: """
@@ -1309,8 +1313,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
                   ),
 
                   */
-
-
 
                 ],
               ),
@@ -1373,7 +1375,6 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   Widget Tab1()
   {
-    Size size = MediaQuery.of(context).size;
 
     return  Expanded(
       child: SingleChildScrollView(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import 'Categories/Categories.dart';
 import 'Onboarding/Onboarding.dart';
 import 'SplashScreen/SplashScreen.dart';
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget
       ),
       // home:   Onboarding(),
       home:   SplashScreen(),
-      getPages:
+        getPages:
         [
 
 

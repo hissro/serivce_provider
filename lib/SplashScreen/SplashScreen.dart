@@ -1,57 +1,16 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../Categories/Categories.dart';
 import '../Utilities/translations/AppLanguage.dart';
 import 'SplashController.dart';
 
 
-class SplashScreen extends StatefulWidget
+class SplashScreen extends StatelessWidget
 {
-  static const String routeName = "SplashScreen";
-
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen>
-{
-
   var simplecontroller = Get.put(SplashController());
   var appLang = Get.put(AppLanguage()) ;
 
 
-
-
-  @override
-
-  void initState()
-  {
-    // TODO: implement initState
-    super.initState();
-     // CeakLogin();
-  }
-
-
-
-
-  @override
-  dispose() {
-    super.dispose();
-  }
-
-  void CeakLogin() async
-  {
-    Timer(const Duration(seconds: 3), ()
-    {
-      // StorageUtil.setOnboarding(true);
-      // Navigator.of(context).pushReplacementNamed('Categories');/
-      
-      Get.offAll(()=> Categories());
-    });
-
-  }
 
 
   @override

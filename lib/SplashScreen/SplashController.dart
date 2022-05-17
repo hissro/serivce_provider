@@ -27,7 +27,6 @@ class SplashController extends GetxController
 
       if (session.read('IsOnBord') == true )
       {
-        print (' On int ');
         Future.delayed(const Duration(seconds: 3), ()
         {
           Get.to(() => Categories());

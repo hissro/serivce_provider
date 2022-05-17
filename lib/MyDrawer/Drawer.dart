@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../Login/Screens/Login/login_screen.dart';
 import '../Utilities/constants.dart';
 
  
@@ -144,6 +146,8 @@ class _MyDrawerState extends State<MyDrawer>
                       style: TextStyle(fontFamily: 'noura')),
                   onTap: ()
                   {
+
+                    Get.offAll(() =>  LoginScreen());
                     // Navigator.pushReplacementNamed(context, LoginScreen.routeName);
 
                   },
