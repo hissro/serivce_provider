@@ -1,7 +1,7 @@
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../Categories/Categories.dart';
 import '../Onboarding/Onboarding.dart';
 
 
@@ -16,7 +16,6 @@ class SplashController extends GetxController
   {
     // TODO: implement onInit
     LoadData();
-
     super.onInit();
   }
 
@@ -29,10 +28,10 @@ class SplashController extends GetxController
       if (session.read('IsOnBord') == true )
       {
         print (' On int ');
-
-        // Get.offAll(() => Onboarding());
-        // Get.offAll(()=> Categories());
-        // Get.offAll(Categories());
+        Future.delayed(const Duration(seconds: 3), ()
+        {
+          Get.to(() => Categories());
+        });
       }
       else
       {

@@ -1,10 +1,7 @@
 import 'dart:async';
-// import 'package:eleqanza/utilits/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:serivce/Onboarding/Onboarding.dart';
-
 import '../Categories/Categories.dart';
 import '../Utilities/translations/AppLanguage.dart';
 import 'SplashController.dart';
@@ -21,7 +18,7 @@ class SplashScreen extends StatefulWidget
 class _SplashScreenState extends State<SplashScreen>
 {
 
-  // var simplecontroller = Get.put(SplashController());
+  var simplecontroller = Get.put(SplashController());
   var appLang = Get.put(AppLanguage()) ;
 
 
@@ -33,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
   {
     // TODO: implement initState
     super.initState();
-     CeakLogin();
+     // CeakLogin();
   }
 
 

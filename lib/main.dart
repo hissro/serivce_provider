@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'Categories/Categories.dart';
+import 'Onboarding/Onboarding.dart';
 import 'SplashScreen/SplashScreen.dart';
 import 'Utilities/translations/LanguageTranslations.dart';
 
@@ -35,9 +37,9 @@ class MyApp extends StatelessWidget
       // home:   Onboarding(),
       home:   SplashScreen(),
       getPages:
-      const [
+        [
 
-        /*
+
         GetPage(
           name: '/',
           page: () => Categories(),
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget
           // binding: ControllerBindings(),
         ),
 
-
+        /*
         GetPage(
           name: '/LoginView',
           page: () => LoginView(),
