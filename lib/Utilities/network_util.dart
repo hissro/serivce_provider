@@ -14,7 +14,6 @@ class NetworkUtil
 
   Future<dynamic> get(String url)
   {
-
     return http.get(Uri.parse(url), headers:
     {
       'Content-Type': 'application/json',
@@ -24,9 +23,9 @@ class NetworkUtil
       final String res = response.body;
       final int statusCode = response.statusCode;
 
-      // print('Res: ${response.body}');
+      print('Res: ${response.body}');
       // print('statusCode: ${response.statusCode}');
-      // debugPrint('NetworkUtil :  $res');
+      debugPrint('NetworkUtil :  $res');
 
       if (statusCode == 200) {
         return json.decode(res);
@@ -37,6 +36,15 @@ class NetworkUtil
       } else {
         throw Exception("Error while fetching data");
       }
+    }, onError: ( e )
+    {
+      print (' On Error');
+      return
+        {
+        "responce":false,
+        "data":[]
+        };
+
     });
   }
 
