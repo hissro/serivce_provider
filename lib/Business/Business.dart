@@ -252,12 +252,13 @@ class _BusinessState extends State<Business>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
 
+        appBar: AppBar(
+          backgroundColor: kSecondaryColor,
           bottom: const TabBar(
             labelColor: Colors.white,
-            unselectedLabelColor: Colors.black,
-            indicatorColor: Colors.teal,
+            unselectedLabelColor: Colors.white,
+            indicatorColor: kBlueColor,
             tabs: [
               Tab(
                 icon: Icon(Icons.menu),

@@ -5,7 +5,7 @@ class Config
 
   static var API_V = "api";
   // static var BASE_URL = "https://eleqanza.com/apps/" ;
-  static var BASE_URL = "http://192.168.0.133/serviceprovider/" ;
+  static var BASE_URL = "http://192.168.0.106/serviceprovider/" ;
 
   static var CATEGORY_LIST = BASE_URL +API_V+ "/get_categories";
   static var BUSINESS_LIST = BASE_URL +API_V+ "/get_business";
