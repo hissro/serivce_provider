@@ -801,7 +801,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
                                           Center(
                                             child: Text(
-                                                 'no_offer'.tr,
+                                                 'لاتوجد عروض',
                                               style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
                                             ),
                                           ),
