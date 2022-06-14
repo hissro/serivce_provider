@@ -139,6 +139,7 @@ class _MyDrawerState extends State<MyDrawer>
                   ),
                   onTap: ()
                   {
+                    Get.to(()=> Categories());
                     // Navigator.pushReplacementNamed(context, Categories.routeName);
                   },
                 ),
