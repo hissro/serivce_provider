@@ -275,7 +275,8 @@ class _BusinessState extends State<Business>
         ),
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
-          children: [
+          children:
+          [
 
 
 
@@ -305,15 +306,19 @@ class _BusinessState extends State<Business>
                     {
                         if (snapshot.hasError)
                         {
+
                           return Container(
+
                             margin: const EdgeInsets.only(top: 60),
                             padding: const EdgeInsets.only(right: 15, left: 15),
-                            child:  Stack(
-                              alignment: Alignment.bottomCenter,
+                            child:  Stack (
+                              alignment: Alignment.topCenter,
                               children: <Widget>[
                                 // Those are our background
                                 Container(
-                                  height: 136,
+                                  height: 126,
+                                  width: double.infinity,
+                                  // width: ,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(22),
                                     color:  ErrorColor ,
@@ -325,14 +330,37 @@ class _BusinessState extends State<Business>
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(22),
                                     ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          const Spacer(),
+
+                                          Center(
+                                            child: Text(
+                                              'لاتوجد بيانات '.tr,
+                                              style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
+                                            ),
+                                          ),
+                                          // it use the available space
+                                          const Spacer(),
+
+                                        ]
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 // our product image
 
                                 // Product title and price
+
+
+                            /*
                                 Positioned(
                                   bottom: 0,
                                   left: 0,
+                                  top: 0,
                                   child: SizedBox(
                                     height: 136,
                                     // our image take 200 width, thats why we set out total width - 200
@@ -355,6 +383,8 @@ class _BusinessState extends State<Business>
                                     ),
                                   ),
                                 ),
+                                */
+
                               ],
                             ),
                           );
