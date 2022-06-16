@@ -23,11 +23,12 @@ class NetworkUtil
       final String res = response.body;
       final int statusCode = response.statusCode;
 
-      print('Res: ${response.body}');
+      // print('Res: ${response.body}');
       // print('statusCode: ${response.statusCode}');
-      debugPrint('NetworkUtil :  $res');
+      // debugPrint('NetworkUtil :  $res');
 
-      if (statusCode == 200) {
+      if (statusCode == 200)
+      {
         return json.decode(res);
       }
 

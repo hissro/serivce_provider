@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:serivce/Utilities/Config.dart';
-import 'package:serivce/Utilities/Functions.dart';
 import 'package:serivce/Utilities/constants.dart';
 import 'package:serivce/Utilities/network_util.dart';
 import 'package:flutter/material.dart';
@@ -26,21 +24,50 @@ class _SignUpScreenState extends State<SignUpScreen>
 {
 
 
-  final idno = TextEditingController();
-  final phone = TextEditingController();
-  final pass = TextEditingController();
-  final repass = TextEditingController();
+  final user_fullname = TextEditingController();
+  final user_phone = TextEditingController();
+  final user_email = TextEditingController();
+  final user_password = TextEditingController();
 
 
 
   var isLogin = false;
   NetworkUtil _netUtil = new NetworkUtil();
 
+  bool _obscureText = true;
 
 
 
 
 
+  Widget _active_showpassword()
+  {
+    if (_obscureText) {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            _obscureText = false;
+          });
+        },
+        child: Icon(
+          Icons.visibility,
+          color: KBlack,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            _obscureText = true;
+          });
+        },
+        child: Icon(
+          Icons.visibility_off,
+          color: KBlack,
+        ),
+      );
+    }
+  }
 
   @override
   void initState()
@@ -54,10 +81,10 @@ class _SignUpScreenState extends State<SignUpScreen>
   void dispose()
   {
     // Clean up the controller when the widget is disposed.
-    idno.dispose();
-    phone.dispose();
-    pass.dispose();
-    repass.dispose();
+    user_fullname.dispose();
+    user_phone.dispose();
+    user_email.dispose();
+    user_password.dispose();
 
     super.dispose();
   }
@@ -86,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen>
               SizedBox(height: size.height * 0.03),
 
               Text(
-                 ('app.SignUp').tr,
+                 ('تسجيل مستخدم جديد').tr,
                 style: TextStyle(fontWeight: FontWeight.bold , fontFamily: 'noura' , color:kTextColor ),
               ),
               SizedBox(height: size.height * 0.01 ),
@@ -100,27 +127,55 @@ class _SignUpScreenState extends State<SignUpScreen>
 
 
               RoundedInputField(
-                hintText:  ('app.ID_No').tr,
+                hintText:  ('الاسم').tr,
                 icon: Icons.person ,
-                controllerval: idno,
+                controllerval: user_fullname,
                 keybord : TextInputType.number, onChanged: (String value) {  },
               ),
 
-              //
-              // RoundedInputField(
-              //   icon: Icons.email_outlined ,
-              //   hintText: translate('app.user_email'),
-              //   controllerval: email,
-              //   keybord : TextInputType.text,
-              // ),
+
+              RoundedInputField(
+                icon: Icons.email_outlined ,
+                hintText:   'البريد الالكتروني' ,
+                controllerval: user_email,
+                keybord : TextInputType.text, onChanged: (String value) {  },
+              ),
 
 
               RoundedInputField(
                 icon: Icons.phone_android ,
-                hintText:  ('app.user_phone').tr,
-                controllerval: phone,
+                hintText:   'رقم الهاتف',
+                controllerval: user_phone,
                 keybord : TextInputType.number, onChanged: (String value) {  },
               ),
+
+
+
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                width: size.width * 0.9,
+                decoration: BoxDecoration(
+                  color: kBlueColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(29),
+                ),
+                child:   TextField(
+                  controller: user_password,
+                  obscureText: _obscureText,
+                  cursorColor: KBlack,
+                  decoration: InputDecoration(
+                    hintText:  ('كلمة المرور').tr,
+                    hintStyle: TextStyle(fontFamily: 'noura'),
+                    icon: Icon(
+                      Icons.lock,
+                      color: KBlack,
+                    ),
+                    suffixIcon: _active_showpassword(),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+
 
 
 
@@ -151,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                     color: Colors.grey,
                     onPressed: (){},
                     child: Text(
-                       ('app.Registration').tr,
+                       ('التسجيل').tr,
                       style: TextStyle(color:Colors.black , fontFamily: 'noura'),
                     ),
                   ),
@@ -171,14 +226,17 @@ class _SignUpScreenState extends State<SignUpScreen>
                 login: false,
                 press: () {
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LoginScreen();
-                      },
-                    ),
-                  );
+
+                  Get.to(()=> LoginScreen());
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return LoginScreen();
+                  //     },
+                  //   ),
+                  // );
                 },
               ),
               OrDivider(),
@@ -212,8 +270,8 @@ class _SignUpScreenState extends State<SignUpScreen>
   {
 
 
-    var Username  = idno.text;
-    var Mobile = phone.text;
+    var Username  = user_fullname.text;
+    var Mobile = user_phone.text;
 
 
     String yearr = _year.text;

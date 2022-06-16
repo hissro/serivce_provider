@@ -74,15 +74,15 @@ class _BusinessDetailsState extends State<BusinessDetails>
         return Tab2();
         break;
 
-      case 2:
-        return Tab3();
-        break;
+      // case 2:
+      //   return Tab3();
+      //   break;
 
-      case 3:
+      case 2:
         return Tab4();
         break;
 
-      case 4:
+      case 3:
         return Tab5();
         break;
 
@@ -414,11 +414,11 @@ class _BusinessDetailsState extends State<BusinessDetails>
             size: 30,
             color: Colors.white,
           ),
-          Icon(
-            Icons.person_outline_sharp,
-            size: 30,
-            color: Colors.white,
-          ),
+          // Icon(
+          //   Icons.person_outline_sharp,
+          //   size: 30,
+          //   color: Colors.white,
+          // ),
           Icon(
             Icons.comment_outlined,
             size: 30,

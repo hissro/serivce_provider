@@ -14,6 +14,7 @@ class Config
   static var BUSINESS_REVIEWS = BASE_URL +API_V+ "/get_reviews";
   static var BUSINESS_PHOTOS = BASE_URL +API_V+ "/get_photos";
   static var LOGIN_URL = BASE_URL +API_V+ "/login";
+  static var signup_URL = BASE_URL +API_V+ "/signup";
   static var GET_DOCTORS = BASE_URL +API_V+ "/get_doctors";
   static var TIME_SLOT_URL = BASE_URL +API_V+ "/get_time_slot";
   static var BOOKAPPOINTMENT_URL = BASE_URL +API_V+ "/add_appointment";
