@@ -9,7 +9,10 @@ import 'package:serivce/Login/components/already_have_an_account_acheck.dart';
 import 'package:serivce/Login/components/rounded_button.dart';
 import 'package:serivce/Login/components/rounded_input_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-  
+import 'package:get/get.dart';
+
+import '../../../Utilities/Config.dart';
+import '../../../Utilities/Functions.dart';
 
 class SignUpScreen extends StatefulWidget
 {
@@ -213,12 +216,12 @@ class _SignUpScreenState extends State<SignUpScreen>
                 ),
               ) :
               RoundedButton(
-                text:  ('app.Registration') .tr  ,
+                text:  ('التسجيل')   ,
                 press: () {
                   setState(() {
                     isLogin = true;
                   });
-                  // _regstriration ();
+                  _regstriration ();
                 },
               ),
               SizedBox(height: size.height * 0.03),
@@ -265,72 +268,54 @@ class _SignUpScreenState extends State<SignUpScreen>
   }
 
 
-  /*
-  Future<Null>  _regstriration()
+
+  void  _regstriration()
   {
 
 
-    var Username  = user_fullname.text;
-    var Mobile = user_phone.text;
 
+     var fullname =  user_fullname.text;
+     var phone =  user_phone.text;
+     var email =  user_email.text;
+     var password  = user_password.text;
 
-    String yearr = _year.text;
-    String _month = selectedUser.id.toString();
-    if ( selectedUser.id < 9 )  {  _month =  "0"+ _month ;  }
-
-    //  1003019575   01/07/1383  123456
-    // nid:1003019575   DOB: 13830701
-    // 1018264109
-
-
-
-    if (
-          Username.length > 0 &&
-          Mobile.length > 0 &&
-          yearr != null &&
-          yearr.length > 0 &&
-          _day != null
-    )
+    if ( phone.length > 0 &&  fullname.length > 0 && password != null &&  email.length > 0 )
     {
-          var _DOB = yearr + _month + _day;
-          // print( '  "Username": $Username , "Mobile":$Mobile, "DOB": $_DOB , "OnlyValidate":true');
 
-        return  _netUtil.post(Config.Register,  body:
-        {"Username": Username.toString() , "Mobile":Mobile.toString(), "DOB": _DOB.toString() , "OnlyValidate":"true"  }).then((dynamic res)
+
+           _netUtil.post(Config.signup_URL,  body:
         {
+          "user_fullname": fullname.toString() ,
+          "user_phone":phone.toString(),
+          "user_email": email.toString() ,
+          "user_password":password.toString()
+        }).then((dynamic res)
+        {
+
+          print (' Rs :${res} ');
+
           setState(()
           {
             isLogin = false;
           });
 
-          if (res["status"] == 200)
+          if (res["responce"] )
           {
-            // Cheak If Data is valid
-            var Sms_Code = res["data"];
-            Users info = Users("", Username, Mobile , _DOB );
+
+            var mesg  =   "مرحب بك:  "  +  fullname.toString() ;
 
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OtpScreen(
-                    OTP: Sms_Code,
-                    user : info,
-                    pageId: "Registration",
-                    ),
-              ),
-            );
+            showAlertDialog(context,mesg );
 
+            Future.delayed(const Duration(seconds: 3), ()
+            {
+              Get.offAll( ()=> LoginScreen());
+            });
 
-          } else if (res["status"] == 102)
-          {
-            var msg = res["errors"][0]["message"] ?? '  ';
-            // print('res $res' );
-            showAlertDialog(context, msg);
           }
           else
             {
-              showAlertDialog(context,  translate ('app.error_nid'));
+              showAlertDialog(context,   'خطا في تسجيل المستخدم الرجاء التواصل مع الدعم الفني'  );
             }
 
         }, onError: (e)
@@ -341,7 +326,7 @@ class _SignUpScreenState extends State<SignUpScreen>
           });
 
           // print (e.toString());
-          showAlertDialog(context, translate('app.connection_erro'));
+          showAlertDialog(context,  'app.connection_erro' );
         });
     } else
       {
@@ -349,19 +334,10 @@ class _SignUpScreenState extends State<SignUpScreen>
       {
         isLogin = false;
       });
-      showAlertDialog(context, translate('app.fill_fields'));
+      showAlertDialog(context,   'الرجاء تعبئة الحقول' );
     }
   }
-   */
-}
 
-
-
-class Month
-{
-  const Month(this.id,this.name);
-  final String name;
-  final int id;
 }
 
 

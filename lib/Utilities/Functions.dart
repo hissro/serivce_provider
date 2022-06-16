@@ -48,7 +48,7 @@ void showSuccessful(BuildContext context, String message)
     actions: <Widget>[
       CupertinoDialogAction(
         isDefaultAction: true,
-        child:  Text(  'app.Ok'.tr  , style: TextStyle( fontFamily: Constants.Noura , color: kPrimaryColor),),
+        child:  Text(  'تخطي'.tr  , style: TextStyle( fontFamily: Constants.Noura , color: kPrimaryColor),),
         onPressed: () {
           Navigator.of(context).pop();
         },
