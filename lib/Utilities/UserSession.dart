@@ -47,7 +47,7 @@ class UserSession extends GetxController
 
   Future<UserModel> getUserInfo() async
    {
-     print ('get User Info ');
+     // print ('get User Info ');
      return UserModel(
          user_id:  session.read("user_id"),
          user_fullname: session.read("user_fullname"),

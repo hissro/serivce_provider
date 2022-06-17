@@ -9,7 +9,6 @@ import 'package:serivce/Model/PhotosModel.dart';
 import 'package:serivce/Model/ReviewsModel.dart';
 import 'package:serivce/Model/ServicesModel.dart';
 import 'package:serivce/MyDrawer/Drawer.dart';
-// import 'package:serivce/TimeSlot/TimeSlot.dart';
 import 'package:serivce/Utilities/Config.dart';
 import 'package:serivce/Utilities/FullScreenImage.dart';
 import 'package:serivce/Utilities/Functions.dart';
@@ -17,6 +16,8 @@ import 'package:serivce/Utilities/constants.dart';
 import 'package:serivce/Utilities/network_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../Login/Screens/Login/login_screen.dart';
+import '../Utilities/UserSession.dart';
 import 'theme/colors/light_colors.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -42,6 +43,9 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   var args = Get.arguments;
   late BusinessModel BusinessInfo;
+
+  var Session = Get.put(UserSession()) ;
+
 
 
   final NetworkUtil _netUtil = NetworkUtil();
@@ -278,7 +282,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _key,
-      backgroundColor: LightColors.kLightYellow,
+      // backgroundColor: LightColors.kLightYellow,
       body: Column(
         children: <Widget>
         [
@@ -452,21 +456,33 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   void Add_New_Review (BuildContext context) async
    {
-    var userId;
-    var busId = BusinessInfo.bus_id;
-    double rating = 1;
 
-    /*
-    var prefs = await SharedPreferences.getInstance();
-    setState(() {
-      user_id = prefs.getString("user_id").toString();
-    });
 
-    if (user_id == null || user_id == "") {
-      Navigator.of(context).pushReplacementNamed('LoginScreen');
-    }
-    else
-      {
+     Session.IsUserLogin ().then((isLogin) {
+
+       if (isLogin)
+         {
+
+
+           //UserInfo  Session
+           Session.getUserInfo().then((user)
+           {
+
+             print (' user_id: '+user.user_id);
+             print (' bus_id: '+BusinessInfo.bus_id);
+             print (' user_fullname: '+BusinessInfo.user_fullname);
+
+
+
+           // var userId = Infoo.;
+
+
+           var bus_id = BusinessInfo.bus_id;
+           var user_id = user.user_id;
+           double rating = 1;
+
+
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -551,7 +567,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                         "rating": rating.toString(),
                       }).then((dynamic res)
                       {
-                            print ('Res :: ${res}');
+                            print ('Rating Respone :: ${res}');
                             reviewController.clear();
                             if (res["responce"])
                               {
@@ -564,7 +580,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       }, onError: (e)
                       {
                         print (' OnErro:  ${e}');
-                        showAlertDialog(context, translate('app.connection_erro'));
+                        showAlertDialog(context,  'خطا في الاتصال بالانترنت' );
                       });
                       Navigator.of(context).pop();
                     }
@@ -582,9 +598,45 @@ class _BusinessDetailsState extends State<BusinessDetails>
           );
         },
       );
-  }
-    */
 
+           });
+         }else
+           {
+
+             Get.defaultDialog(
+               title: "الرجاء تسجيل الدخول",
+               middleText: "You content goes here...",
+               content: Column(
+                 children:
+                 [
+
+
+                   Padding(
+                     padding: const EdgeInsets.all(7.0),
+                     child: Center(
+                       child: Text(
+                         "الرجاء تسجيل الدخول لاضافة التقييم"
+                       ),
+                     ),
+                   ),
+
+
+                   
+                 ],
+               ),
+               barrierDismissible: false,
+               radius: 30.0,
+               confirm:  ElevatedButton(onPressed: ()
+               {
+                 Get.to(()=>LoginScreen());
+               }, child: Text("دخول")),
+               cancel: ElevatedButton(onPressed: () {
+                 Get.back();
+               }, child: Text("إلغاء")),
+             );
+           }
+
+     });
 
   }
 
@@ -852,6 +904,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   Widget Tab4()
   {
+    Size size = MediaQuery.of(context).size;
 
     return  Expanded(
       child: SingleChildScrollView(
@@ -872,10 +925,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       GestureDetector(
                         onTap: ()
                         {
-
                           Add_New_Review (context);
-
-
                         },
                         child: calendarIcon(),
                       ),
@@ -893,77 +943,155 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       if (snapshot.hasData )
                       {
 
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (BuildContext ctx, index)
-                          {
-                            var info = snapshot.data![index];
+                        if (snapshot.data!.length > 0)
+                         { return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (BuildContext ctx, index)
+                            {
+                              var info = snapshot.data![index];
 
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 16.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>
-                                [
-                                  CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundColor: Colors.transparent,
-                                    child:  CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                       imageUrl: info.user_image,
-                                      placeholder: (context, url) => const SpinKitFadingFour(
-                                        color: Colors.amber,
-                                        size: 50.0,
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>
+                                  [
+                                    CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundColor: Colors.transparent,
+                                      child:  CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: info.user_image,
+                                        placeholder: (context, url) => const SpinKitFadingFour(
+                                          color: Colors.amber,
+                                          size: 50.0,
+                                        ),
+                                        errorWidget: (context, url, error) => Image.asset("assets/images/profile.png"),
                                       ),
-                                      errorWidget: (context, url, error) => Image.asset("assets/images/profile.png"),
+                                      // Image.network(info.user_image  ),
                                     ),
-                                    // Image.network(info.user_image  ),
+                                    const SizedBox(width: 10.0),
+
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>
+                                      [
+                                        RatingBarIndicator(
+                                          rating: double.parse(info.ratings),
+                                          itemBuilder: (context, index) => Icon(
+                                            Icons.star,
+                                            color: kPrimaryColor.withOpacity(0.5),
+                                          ),
+                                          itemCount: 5,
+                                          itemSize: 20.0,
+                                          direction: Axis.horizontal,
+                                        ),
+
+                                        const SizedBox(height: 5.0),
+
+                                        Text(
+                                          info.reviews ,
+                                          style: const TextStyle(
+                                            fontFamily: 'noura',
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+
+                                        Text(
+                                          info.user_fullname,
+                                          style: const TextStyle(
+                                              fontFamily: 'title',
+                                              fontSize: 14.0,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black45),
+                                        ),
+
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );}
+                        else
+                        {
+                          return Container(
+                            margin: const EdgeInsets.only(top: 60),
+                            padding: const EdgeInsets.only(right: 15, left: 15),
+                            child:  Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: <Widget>[
+                                // Those are our background
+                                Container(
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(22),
+                                    color:  kTextColor ,
+                                    boxShadow: const [kDefaultShadow],
                                   ),
-                                  const SizedBox(width: 10.0),
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 3),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                  ),
+                                ),
+                                // our product image
 
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>
-                                    [
-                                      RatingBarIndicator(
-                                        rating: double.parse(info.ratings),
-                                        itemBuilder: (context, index) => Icon(
-                                          Icons.star,
-                                          color: kPrimaryColor.withOpacity(0.5),
+                                // Product title and price
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  top: 0,
+                                  child: SizedBox(
+                                    height: 136,
+                                    // our image take 200 width, thats why we set out total width - 200
+                                    width: size.width ,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        const Spacer(),
+
+                                        Center(
+                                          child: Text(
+                                            'لاتوجد بيانات',
+                                            style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
+                                          ),
                                         ),
-                                        itemCount: 5,
-                                        itemSize: 20.0,
-                                        direction: Axis.horizontal,
-                                      ),
+                                        // it use the available space
+                                        const Spacer(),
 
-                                      const SizedBox(height: 5.0),
+                                        /*
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding * 1.5, // 30 padding
+                          vertical: kDefaultPadding / 4, // 5 top and bottom
+                        ),
+                        decoration: BoxDecoration(
+                          color: kSecondaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(22),
+                            topRight: Radius.circular(22),
+                          ),
+                        ),
+                        child: Text(
+                          "\$${product.bus_id}",
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                      ),*/
 
-                                      Text(
-                                        info.reviews ,
-                                        style: const TextStyle(
-                                          fontFamily: 'noura',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-
-                                       Text(
-                                        info.user_fullname,
-                                        style: const TextStyle(
-                                            fontFamily: 'title',
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black45),
-                                      ),
-
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        );
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
 
                       } else if (snapshot.connectionState == "active" )
                       {
@@ -1519,7 +1647,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                         minWidth: 200.0,
                         height: 35,
                         color: const Color(0xFFfff9ec),
-                        child: const Text('حجز',
+                        child: const Text('طلب',
                             style: TextStyle(fontSize: 16.0, color: Colors.black , fontFamily: "noura")),
                         onPressed: () {
                           booking (  );
