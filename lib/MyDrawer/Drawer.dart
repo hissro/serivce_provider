@@ -6,6 +6,7 @@ import 'package:serivce/Utilities/translations/AppLanguage.dart';
 import '../Categories/Categories.dart';
 import '../Login/Screens/Login/login_screen.dart';
 import '../Utilities/constants.dart';
+import '../settings/settings.dart';
 
  
 class MyDrawer extends StatefulWidget
@@ -195,6 +196,16 @@ class _MyDrawerState extends State<MyDrawer>
                   },
                 ),
 
+
+                ListTile(
+                  leading: const Icon(Icons.settings_rounded, color: kPrimaryColor),
+                  title: const Text( ('الاعدادات'),
+                      style: TextStyle(fontFamily: 'noura')),
+                  onTap: () {
+                    // Navigator.of(context).pushReplacementNamed("LoginModel");
+                    Get.to(()=> settings());
+                  },
+                ),
 
                 UserInfo.IsLogin   ?
                 ListTile(

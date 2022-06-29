@@ -4,7 +4,7 @@ class Config
 {
 
   static var API_V = "api";
-  // static var BASE_URL = "https://eleqanza.com/apps/" ;
+  // static var BASE_URL = "https://awezo.hissro.net/" ;
   static var BASE_URL = "http://192.168.0.106/serviceprovider/" ;
 
   static var CATEGORY_LIST = BASE_URL +API_V+ "/get_categories";
@@ -22,6 +22,7 @@ class Config
   static var CANCELAPPOINTMENTS_URL = BASE_URL +API_V+ "/cancel_appointment";
   static var ADD_BUSINESS_REVIEWS = BASE_URL +API_V+ "/add_business_review";
   static var USERDATA_URL = BASE_URL +API_V+ "/get_userdata";
+  static var VendorRegistration = BASE_URL +API_V+ "/vendor_registration";
 
 
 
