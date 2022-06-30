@@ -300,77 +300,60 @@ class _RequestProviderState extends State<RequestProvider>
               {
 
 
-
-
-
-                print ('user_id : ${user.user_id} \n' );
-                print (
-                    'bus_title:'+bus_title+'\n'+
-                        'bus_description:'+bus_description+'\n'+
-                        'bus_google_street:'+bus_google_street+'\n'+
-                        'bus_contact:'+bus_contact+'\n'+
-                        'buscat:'+buscat+'\n'+
-                        '');
-
-
-
-
-
-          return _netUtil.post(Config.VendorRegistration, body:
-          {
-            "user_id":user.user_id.toString(),
-            "bus_title": bus_title,
-            "bus_description": bus_description,
-            "bus_google_street": bus_google_street ,
-            "bus_latitude":"2.1111",
-            "bus_longitude":"23.5555",
-            "bus_contact": bus_contact.toString(),
-            "bus_logo": "",
-            "bus_status":"0",
-            "city_id":"1",
-            "country_id":"1",
-            "locality_id":"1",
-            "is_trusted":"0",
-            "buscat":buscat.toString(),
-          }).then((dynamic res)
-          {
-
-            print ( ' res ${res} ');
-            setState(()
-            {
-              isLogin = false;
-            });
-
-
-            if (res["responce"])
-            {
-
-
-                showSuccessful(context, '  تم إرسال الطلب بنجاح  ');
-                Future.delayed(const Duration(seconds: 3), ()
+                return _netUtil.post(Config.VendorRegistration, body:
                 {
-                  Get.offAll( ()=> Categories());
-                });
-              }
-              else
-              {
-              setState(()
-              {
-                isLogin = false;
-              });
-                showAlertDialog(context,"خطا في التسجيل");
-              }
+                  "user_id":user.user_id.toString(),
+                  "bus_title": bus_title,
+                  "bus_description": bus_description,
+                  "bus_google_street": bus_google_street ,
+                  "bus_latitude":"2.1111",
+                  "bus_longitude":"23.5555",
+                  "bus_contact": bus_contact.toString(),
+                  "bus_logo": "",
+                  "bus_status":"0",
+                  "city_id":"1",
+                  "country_id":"1",
+                  "locality_id":"1",
+                  "is_trusted":"0",
+                  "buscat":buscat.toString(),
+                }).then((dynamic res)
+                {
+
+                  setState(()
+                  {
+                    isLogin = false;
+                  });
+
+
+                  if (res["responce"])
+                  {
+
+
+                      showSuccessful(context, '  تم إرسال الطلب بنجاح  ');
+                      Future.delayed(const Duration(seconds: 3), ()
+                      {
+                        Get.offAll( ()=> Categories());
+                      });
+                    }
+                    else
+                    {
+                    setState(()
+                    {
+                      isLogin = false;
+                    });
+                      showAlertDialog(context,"خطا في التسجيل");
+                    }
 
 
 
-            }, onError: (e)
-            {
-              setState(()
-              {
-                isLogin = false;
-              });
-              showAlertDialog(context,  e.toString()  );
-            });
+                  }, onError: (e)
+                  {
+                    setState(()
+                    {
+                      isLogin = false;
+                    });
+                    showAlertDialog(context,  e.toString()  );
+                  });
 
 
               });

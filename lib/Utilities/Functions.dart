@@ -12,7 +12,6 @@ const kDefaultShadow = BoxShadow(
 );
 
 
-
 void showAlertDialog(BuildContext context, String message)
 {
   // set up the AlertDialog
@@ -66,8 +65,5 @@ void showSuccessful(BuildContext context, String message)
 
 bool showLogin ()
 {
-
-
   return  false ;
-
 }
