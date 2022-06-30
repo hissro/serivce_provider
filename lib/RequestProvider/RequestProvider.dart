@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../Categories/Categories.dart';
+import '../Login/Screens/Login/login_screen.dart';
 import '../Login/components/text_field_container.dart';
 import '../Model/CategoryModel.dart';
 import '../MyDrawer/Drawer.dart';
+import '../Utilities/Config.dart';
 import '../Utilities/ErrorPage.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/UserSession.dart';
 import '../Utilities/constants.dart';
+import '../Utilities/network_util.dart';
 import 'RequestProviderController.dart';
 
 class RequestProvider extends StatefulWidget {
@@ -14,11 +20,38 @@ class RequestProvider extends StatefulWidget {
   State<RequestProvider> createState() => _RequestProviderState();
 }
 
-class _RequestProviderState extends State<RequestProvider> {
-  TextEditingController bus_titleController = TextEditingController();
-  TextEditingController bus_slugController = TextEditingController();
+class _RequestProviderState extends State<RequestProvider>
+{
+
+  /*
+    user_id:4
+    bus_title:Post MAN Store
+    bus_description:This is Post Man Store
+    bus_google_street:Ryadh
+    bus_latitude:2.1111
+    bus_longitude:23.5555
+    bus_contact:16077877
+    bus_logo:logo.png
+    bus_status:0
+    city_id:1
+    country_id:1
+    locality_id:1
+    is_trusted:0
+    buscat:1
+   */
+
+  
+  TextEditingController  bus_titleController = TextEditingController();
+  TextEditingController  bus_descriptionController = TextEditingController();
+  TextEditingController  bus_google_streetController = TextEditingController();
+  TextEditingController  bus_contactController = TextEditingController();
+
   var vcontroller = Get.put(RequestProviderController());
+  var Session = Get.put(UserSession()) ;
+
   late Future _load ;
+  bool isLogin = false ;
+  final NetworkUtil _netUtil = NetworkUtil();
 
 
   @override
@@ -57,6 +90,7 @@ class _RequestProviderState extends State<RequestProvider> {
                   style: TextStyle(fontSize: 20),
                 ),
               ),
+
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -67,11 +101,12 @@ class _RequestProviderState extends State<RequestProvider> {
                   ),
                 ),
               ),
+
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextField(
                   // obscureText: true,
-                  controller: bus_slugController,
+                  controller: bus_descriptionController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'الوصف',
@@ -172,56 +207,235 @@ class _RequestProviderState extends State<RequestProvider> {
                   }),
 
 
+
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextField(
                   // obscureText: true,
-                  controller: bus_slugController,
+                  controller: bus_google_streetController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'الوصف',
+                    labelText: 'العنوان',
                   ),
                 ),
               ),
+
+
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: bus_contactController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'رقم التواصل',
+                  ),
+                ),
+              ),
+
               SizedBox(
                 height: 10,
               ),
 
 
-              InkWell(
-                onTap: () {
-                  print(bus_titleController.text);
-                  print(bus_slugController.text);
-                  print(vcontroller.seletectd.title);
 
-
-                },
-                child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child:   Text('التالي'),
-
-
-                ),
-              ),
-
+              !isLogin ?
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     child: const Text('التسجيل'),
-                    onPressed: ()
-                    {
-                      print(bus_titleController.text);
-                      print(bus_slugController.text);
-                      print(vcontroller.seletectd.title);
+                    onPressed: ()=> SaveData(),
+
+                  ),) :
+              SpinKitFadingCircle(
+                itemBuilder: (BuildContext context, int index) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: index.isEven
+                          ?   kPrimaryLightColor
+                          : kSecondaryColor,
+                    ),
+                  );
+                },
+              ),
 
 
-                    },
-                  )),
+
             ],
           )),
       drawer: MyDrawer(),
     );
   }
+
+
+  void SaveData()
+  {
+
+
+    var bus_title = bus_titleController.text;
+    var bus_description = bus_descriptionController.text;
+    var bus_google_street  = bus_google_streetController.text;
+    var bus_contact  = bus_contactController.text;
+    var buscat =  vcontroller.seletectd.id;
+
+    setState(() {
+      isLogin = true;
+    });
+
+
+
+
+      if (bus_title.isNotEmpty)
+      {
+        if (bus_description.isNotEmpty)
+        {
+          Session.IsUserLogin ().then((isLoginn)
+          {
+            if (isLoginn)
+            {
+
+              //UserInfo  Session
+              Session.getUserInfo().then((user)
+              {
+
+
+
+
+
+                print ('user_id : ${user.user_id} \n' );
+                print (
+                    'bus_title:'+bus_title+'\n'+
+                        'bus_description:'+bus_description+'\n'+
+                        'bus_google_street:'+bus_google_street+'\n'+
+                        'bus_contact:'+bus_contact+'\n'+
+                        'buscat:'+buscat+'\n'+
+                        '');
+
+
+
+
+
+          return _netUtil.post(Config.VendorRegistration, body:
+          {
+            "user_id":user.user_id.toString(),
+            "bus_title": bus_title,
+            "bus_description": bus_description,
+            "bus_google_street": bus_google_street ,
+            "bus_latitude":"2.1111",
+            "bus_longitude":"23.5555",
+            "bus_contact": bus_contact.toString(),
+            "bus_logo": "",
+            "bus_status":"0",
+            "city_id":"1",
+            "country_id":"1",
+            "locality_id":"1",
+            "is_trusted":"0",
+            "buscat":buscat.toString(),
+          }).then((dynamic res)
+          {
+
+            print ( ' res ${res} ');
+            setState(()
+            {
+              isLogin = false;
+            });
+
+
+            if (res["responce"])
+            {
+
+
+                showSuccessful(context, '  تم إرسال الطلب بنجاح  ');
+                Future.delayed(const Duration(seconds: 3), ()
+                {
+                  Get.offAll( ()=> Categories());
+                });
+              }
+              else
+              {
+              setState(()
+              {
+                isLogin = false;
+              });
+                showAlertDialog(context,"خطا في التسجيل");
+              }
+
+
+
+            }, onError: (e)
+            {
+              setState(()
+              {
+                isLogin = false;
+              });
+              showAlertDialog(context,  e.toString()  );
+            });
+
+
+              });
+            }else
+            {
+              setState(() {
+                isLogin = false;
+              });
+
+              Get.defaultDialog(
+                title: "الرجاء تسجيل الدخول",
+                middleText: "",
+                content: Column(
+                  children:
+                  [
+
+
+                    Padding(
+                      padding: const EdgeInsets.all(7.0),
+                      child: Center(
+                        child: Text(
+                            "الرجاء تسجيل الدخول "
+                        ),
+                      ),
+                    ),
+
+
+
+                  ],
+                ),
+                barrierDismissible: false,
+                radius: 30.0,
+                confirm:  ElevatedButton(onPressed: ()
+                {
+                  Get.to(()=>LoginScreen());
+                }, child: Text("دخول")),
+                cancel: ElevatedButton(onPressed: () {
+                  Get.back();
+                }, child: Text("إلغاء")),
+              );
+            }
+
+          });
+
+
+
+
+
+        }
+        else
+        {
+          setState(()
+          {
+            isLogin = false;
+          });
+          showAlertDialog(context,  'الرجاء ادخال الوصف ');
+        }
+      }
+      else {
+        setState(() {
+          isLogin = false;
+        });
+        showAlertDialog(context, 'الرجاء إدخال العنوان');
+      }
+  }
+
+
 }

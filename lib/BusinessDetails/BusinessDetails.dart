@@ -458,7 +458,8 @@ class _BusinessDetailsState extends State<BusinessDetails>
    {
 
 
-     Session.IsUserLogin ().then((isLogin) {
+     Session.IsUserLogin ().then((isLogin)
+     {
 
        if (isLogin)
          {

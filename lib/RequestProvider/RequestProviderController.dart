@@ -40,7 +40,6 @@ class RequestProviderController extends GetxController
       {
         for (var i in infos)
         {
-          print ( i );
           var res = Category.fromJson(i);
           cats.add(res);
         }
