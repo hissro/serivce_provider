@@ -18,20 +18,8 @@ class _RequestProviderState extends State<RequestProvider> {
   TextEditingController bus_titleController = TextEditingController();
   TextEditingController bus_slugController = TextEditingController();
   var vcontroller = Get.put(RequestProviderController());
-
   late Future _load ;
 
-  Category _mySelection = Category(
-      leval: '',
-      slug: '',
-      status: '',
-      image: '',
-      id: '-1',
-      Count: '',
-      description: '',
-      parent: '',
-      PCount: '',
-      title: 'إختر القسم');
 
   @override
   void initState() {
@@ -178,78 +166,7 @@ class _RequestProviderState extends State<RequestProvider> {
                                       ),
                                     ),
                                   )
-
-
                             );
-
-
-                          return TextFieldContainer(
-                            child: Row(
-                              children: [
-                                Text(
-                                  'app.location',
-                                  style: TextStyle(
-                                      fontFamily: 'noura', color: Colors.teal),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                DropdownButton<Category>(
-                                  value: vcontroller.seletectd,
-                                  onChanged: (newValue)
-                                  {
-                                    Category x = newValue as Category;
-                                    vcontroller.updateval(x);
-                                  },
-                                  items: snapshot.data
-                                      .map<DropdownMenuItem<Category>>((value)
-                                  {
-                                    return DropdownMenuItem<Category>(
-                                      value: value,
-                                      child: Container(
-                                        width: size.width - 200,
-                                        child: new Text(value.title,
-                                            style: TextStyle(
-                                                fontFamily: 'noura',
-                                                fontSize: 16,
-                                                color: Colors.teal)),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ],
-                            ),
-                          );
-
-                          return DropdownButton<Category>(
-                            items: snapshot.data
-                                .map<DropdownMenuItem<Category>>((value) {
-                              print(value.title);
-                              return DropdownMenuItem<Category>(
-                                value: value,
-                                child: Container(
-                                  width: size.width - 200,
-                                  child: new Text(value.title,
-                                      style: TextStyle(
-                                          fontFamily: 'noura',
-                                          fontSize: 16,
-                                          color: Colors.green)),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newVal) {
-                              Category xx = newVal as Category;
-
-                              print(' New Value :${xx.title}');
-
-                              // setState(() {
-                              //   print("previous ${this._salutation}");
-                              //   print("selected $value");
-                              //   this._salutation = value;
-                              // });
-                            },
-                            value: _mySelection,
-                          );
                         }
                     }
                   }),
@@ -269,14 +186,37 @@ class _RequestProviderState extends State<RequestProvider> {
               SizedBox(
                 height: 10,
               ),
+
+
+              InkWell(
+                onTap: () {
+                  print(bus_titleController.text);
+                  print(bus_slugController.text);
+                  print(vcontroller.seletectd.title);
+
+
+                },
+                child: Container(
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child:   Text('التالي'),
+
+
+                ),
+              ),
+
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     child: const Text('التسجيل'),
-                    onPressed: () {
+                    onPressed: ()
+                    {
                       print(bus_titleController.text);
                       print(bus_slugController.text);
+                      print(vcontroller.seletectd.title);
+
+
                     },
                   )),
             ],
