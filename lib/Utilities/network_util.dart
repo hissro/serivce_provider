@@ -60,7 +60,7 @@ class NetworkUtil
       final String res = response.body;
       final int statusCode = response.statusCode;
 
-      debugPrint('NetworkUtil :  ${response.body}');
+      // debugPrint('NetworkUtil :  ${response.body}');
 
       // print( res.toString() );
       if (statusCode < 200)

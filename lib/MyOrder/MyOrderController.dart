@@ -42,7 +42,7 @@ class MyOrderController extends GetxController
 
           for (var i in infos)
           {
-            // print (i);
+            print (i);
             var res = MyOrderModel.fromJson(i);
             Orders.add(res);
           }

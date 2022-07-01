@@ -38,11 +38,8 @@ class OrderDetailsController extends GetxController
     {
       var responce = data["responce"];
       var infos = data["data"];
-
-      print (' R.1 ${busness_appointment_id}');
       if (responce)
       {
-
 
         for (var i in infos)
         {

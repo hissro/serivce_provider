@@ -9,7 +9,7 @@ class Config
 
   static var CATEGORY_LIST = BASE_URL +API_V+ "/get_categories";
   static var BUSINESS_LIST = BASE_URL +API_V+ "/get_business";
-  static var BUSINESS_SERVICES = BASE_URL +API_V+ "/appointment_service";
+  static var BUSINESS_SERVICES = BASE_URL +API_V+ "/get_services";
   static var GET_EMPLOYEE = BASE_URL +API_V+ "/get_doctors";
   static var BUSINESS_REVIEWS = BASE_URL +API_V+ "/get_reviews";
   static var BUSINESS_PHOTOS = BASE_URL +API_V+ "/get_photos";
@@ -25,6 +25,7 @@ class Config
   static var AddAppointment = BASE_URL +API_V+ "/add_appointment";
   static var MyAppointments = BASE_URL +API_V+ "/my_appointments";
 
+  static var order_SERVICES = BASE_URL +API_V+ "/appointment_service";
 
 
   /* Other Path */
