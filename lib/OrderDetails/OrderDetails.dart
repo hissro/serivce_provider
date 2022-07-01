@@ -35,7 +35,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text( ' بينات الطلب ' ),
+          title: Text( ' الخدمات ' ),
         ),
         body: SingleChildScrollView(
           child: Card(
@@ -44,8 +44,9 @@ class _OrderDetailsState extends State<OrderDetails> {
               children: [
                 ListTile(
                   leading: Icon(Icons.arrow_drop_down_circle),
-                  title:   Text(Info.bus_title),
+                  title:   Text("مقدم الخدمة: " +Info.bus_title),
                   subtitle: Text(
+                    "رقم التواصل:  "+
                     Info.app_phone,
                     style: TextStyle(color: Colors.black.withOpacity(0.6)),
                   ),

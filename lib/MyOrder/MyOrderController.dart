@@ -39,27 +39,18 @@ class MyOrderController extends GetxController
         var infos = data["data"];
         if (responce)
         {
-
           for (var i in infos)
           {
-            print (i);
             var res = MyOrderModel.fromJson(i);
             Orders.add(res);
           }
-
         }
-
-
         return Orders;
       }, onError: (e)
       {
         print(e.toString());
         return Orders;
       });
-
-
-
-
   }
 
 
