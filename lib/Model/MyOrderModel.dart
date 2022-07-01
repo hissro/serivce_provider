@@ -1,6 +1,7 @@
 
 class MyOrderModel
 {
+  final String id;
   final String bus_title;
   final String app_name;
   final String app_phone;
@@ -14,6 +15,7 @@ class MyOrderModel
 
   const MyOrderModel  (
       {
+        required this.id,
         required this.bus_title,
         required this.app_name,
         required this.app_phone,
@@ -32,6 +34,7 @@ class MyOrderModel
       c = c.replaceAll("&nbsp;", ' ') ;
 
     return MyOrderModel(
+      id: json["id"],
       bus_title: json["bus_title"],
       app_name: json["app_name"],
       app_phone: json["app_phone"],

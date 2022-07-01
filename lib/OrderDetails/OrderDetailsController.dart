@@ -30,7 +30,7 @@ class OrderDetailsController extends GetxController
     List<OrderServicesModel> Services = [];
 
 
-    return _netUtil.post(Config.BUSINESS_SERVICES, body:
+    return _netUtil.post(Config.order_SERVICES, body:
     {
       "appointment_id":busness_appointment_id.toString(),
 
@@ -43,7 +43,7 @@ class OrderDetailsController extends GetxController
 
         for (var i in infos)
         {
-          print (i);
+          
           var res = OrderServicesModel.fromJson(i);
           Services.add(res);
         }

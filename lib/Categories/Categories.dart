@@ -58,9 +58,6 @@ class _CategoriesState extends State<Categories>
         }
       }
 
-      print (' Request Done ');
-
-
       return cats;
     }, onError: (e)
     {
