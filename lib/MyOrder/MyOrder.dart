@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../Model/MyOrderModel.dart';
 import '../MyDrawer/Drawer.dart';
+import '../OrderDetails/OrderDetails.dart';
 import '../Utilities/Functions.dart';
 import '../Utilities/constants.dart';
 import 'MyOrderController.dart';
@@ -119,42 +120,48 @@ class MyOrder extends StatelessWidget {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext ctx, index) {
                         var info = snapshot.data![index];
-                        Color status =
-                            info.status == "0" ? Colors.teal : Colors.yellow;
+                        Color status =  info.status == "0" ? Colors.teal : Colors.yellow;
+                        String Orstatus =  info.status == "0" ? "مكتمل" : "إنتظار";
 
                         return InkWell(
-                          onTap: () {},
-                          child: Card(
-                            clipBehavior: Clip.antiAlias,
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(
-                                    Icons.info_outline,
-                                    color: status,
-                                  ),
-                                  title: Text(' ${info.bus_title}'),
-                                  subtitle: Text(
-                                    ' ${info.appointment_date}',
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6)),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        '${info.bus_description}',
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6)),
-                                      ),
+                          onTap: () {
+                             Get.to(OrderDetails(),  arguments:
+                            {
+                              'Info': info
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Icon(
+                                      Icons.info_outline,
+                                      color: status,
                                     ),
-                                  ],
-                                ),
-                              ],
+                                    title: Text(' ${info.bus_title}'),
+                                    subtitle: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'تاريخ الطلب:  ${info.appointment_date}',
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(0.6)),
+                                        ),
+                                        Text(
+                                          'حالة الطلب:  ${Orstatus}',
+                                          style: TextStyle(
+                                              color: status.withOpacity(0.6)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
                             ),
                           ),
                         );
