@@ -23,6 +23,7 @@ class Config
   static var ADD_BUSINESS_REVIEWS = BASE_URL +API_V+ "/add_business_review";
   static var USERDATA_URL = BASE_URL +API_V+ "/get_userdata";
   static var VendorRegistration = BASE_URL +API_V+ "/vendor_registration";
+  static var AddAppointment = BASE_URL +API_V+ "/add_appointment";
 
 
 

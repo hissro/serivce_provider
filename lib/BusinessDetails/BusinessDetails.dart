@@ -56,14 +56,14 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
   late  List<ServicesModel> _services = [];
   var booking_button = false ;
-
   List<EmployeeModel> employes = [];
-
   int _page = 0;
+
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-
   final reviewController = TextEditingController();
+
+  bool isLogin = false;
 
 
   Widget get_page(index)
@@ -1639,6 +1639,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
 
 
                   booking_button == true ?
+                  !isLogin ?
                   Container(
                     margin: const EdgeInsets.only(top: 40),
                     child: Center(
@@ -1648,14 +1649,29 @@ class _BusinessDetailsState extends State<BusinessDetails>
                         minWidth: 200.0,
                         height: 35,
                         color: const Color(0xFFfff9ec),
-                        child: const Text('طلب',
-                            style: TextStyle(fontSize: 16.0, color: Colors.black , fontFamily: "noura")),
-                        onPressed: () {
-                          booking (  );
+                        child: const Text('طلب', style: TextStyle(fontSize: 16.0, color: Colors.black , fontFamily: "noura")),
+                        onPressed: ()
+                        {
+                          setState(()
+                          {
+                            isLogin = true;
+                            booking (  );
+                          });
                         },
                       ),
                     ),
-                  ): Container(),
+                  ):SpinKitFadingCircle(
+                    itemBuilder: (BuildContext context, int index) {
+                      return DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: index.isEven
+                              ?   kPrimaryLightColor
+                              : kSecondaryColor,
+                        ),
+                      );
+                    },
+                  )
+                      : Container(),
 
                   /*
                   SizedBox(height: 15.0),
@@ -1686,52 +1702,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                 ],
               ),
             ),
-            /* Container(
-              color: Colors.transparent,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20.0, vertical: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  subheading('Active Projects'),
-                  SizedBox(height: 5.0),
-                  Row(
-                    children: <Widget>[
-                      ActiveProjectsCard(
-                        cardColor: LightColors.kGreen,
-                        loadingPercent: 0.25,
-                        title: 'Medical App',
-                        subtitle: '9 hours progress',
-                      ),
-                      SizedBox(width: 20.0),
-                      ActiveProjectsCard(
-                        cardColor: LightColors.kRed,
-                        loadingPercent: 0.6,
-                        title: 'Making History Notes',
-                        subtitle: '20 hours progress',
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      ActiveProjectsCard(
-                        cardColor: LightColors.kDarkYellow,
-                        loadingPercent: 0.45,
-                        title: 'Sports App',
-                        subtitle: '5 hours progress',
-                      ),
-                      SizedBox(width: 20.0),
-                      ActiveProjectsCard(
-                        cardColor: LightColors.kBlue,
-                        loadingPercent: 0.9,
-                        title: 'Online Flutter Course',
-                        subtitle: '23 hours progress',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),  */
+
           ],
         ),
       ),
@@ -1745,26 +1716,104 @@ class _BusinessDetailsState extends State<BusinessDetails>
   void booking (  )
   {
 
+      List<ServicesModel> Myservices = [];
+      String ServiceString ="" ;
+      var bus_id = BusinessInfo.bus_id;
 
-    if (_services.isNotEmpty )
-    {
 
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => TimeSlot(
-      //         services: _services,
-      //         Business: BusinessInfo.
-      //         emps: employes
-      //
-      //     ),
-      //   ),
-      // );
+      Session.IsUserLogin ().then((isLoginn)
+      {
+        if (isLoginn)
+        {
+          Session.getUserInfo().then((user)
+          {
 
-    }else
-       {
-         print ("no Choies any service");
-       }
+            var user_id = user.user_id ;
+            var user_fullname = user.user_fullname ;
+            var user_email = user.user_email ;
+            var user_phone = user.user_phone ;
+
+            for (var ii in _services )
+            {
+              if (ii.isclicked)
+              {
+                // print("\nName : ${ii.service_title} ::   Is Choieses ${ii.isclicked} ");
+                Myservices.add(ii);
+                ServiceString  = ServiceString +  ii.id.toString()+",";
+              }
+            }
+
+
+
+            if ( Myservices.length >0 )
+            {
+
+              ServiceString = ServiceString.substring(0, ServiceString.length - 1);
+              return _netUtil.post(Config.AddAppointment, body:
+              {
+                "user_id":user_id.toString(),
+                "bus_id":bus_id ,
+                "doct_id": "",
+                "user_fullname": user_fullname ,
+                "user_email": user_email,
+                "user_phone":user_phone,
+                "services": ServiceString,
+              }).then((dynamic res)
+              {
+
+                print ('Res :${res}');
+                setState(()
+                {
+                  isLogin = false;
+                });
+
+
+                if (res["responce"])
+                {
+
+                  showSuccessful(context, '  تم إرسال الطلب بنجاح  ');
+                  Future.delayed(const Duration(seconds: 3), ()
+                  {
+                    // Get.offAll( ()=> Categories());
+                  });
+                }
+                else
+                {
+                  setState(()
+                  {
+                    isLogin = false;
+                  });
+                  showAlertDialog(context,"خطا في طلب الخدمة");
+                }
+
+
+
+              }, onError: (e)
+              {
+                setState(()
+                {
+                  isLogin = false;
+                });
+                showAlertDialog(context,  e.toString()  );
+              });
+
+
+            }else
+            {
+              setState(()
+              {
+                isLogin = false;
+              });
+              showAlertDialog (context,"الرجاء اختيار خدمة علي الاقل");
+            }
+
+
+
+          });
+        }
+     });
+
+
 
   }
 
