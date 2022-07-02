@@ -22,10 +22,8 @@ class _MyDrawerState extends State<MyDrawer>
 
   UserSession UserInfo = Get.put(UserSession()) ;
   var appLang = Get.put(AppLanguage());
-
   var title = "AWEZO";
 
-  // appLang.RTL
 
 
   @override
@@ -38,7 +36,6 @@ class _MyDrawerState extends State<MyDrawer>
     setState(() {
       title = UserInfo.title;
     });
-
 
   }
 
@@ -184,21 +181,21 @@ class _MyDrawerState extends State<MyDrawer>
                 ) :Container(),
 
 
-                const ListTile(
-                  leading: Icon(Icons.language, color: kPrimaryColor ),
-                  title: Text( ('اللغة'),
-                      style: TextStyle(fontFamily: 'noura')),
-                  // onTap: () => _onActionSheetPress(context),
-                ),
+                // const ListTile(
+                //   leading: Icon(Icons.language, color: kPrimaryColor ),
+                //   title: Text( ('اللغة'),
+                //       style: TextStyle(fontFamily: 'noura')),
+                //   // onTap: () => _onActionSheetPress(context),
+                // ),
 
-                ListTile(
-                  leading: const Icon(Icons.share, color: kPrimaryColor),
-                  title: const Text( ('عن التطبيق'),
-                      style: TextStyle(fontFamily: 'noura')),
-                  onTap: () {
-                    // Navigator.of(context).pushReplacementNamed("LoginModel");
-                  },
-                ),
+                // ListTile(
+                //   leading: const Icon(Icons.share, color: kPrimaryColor),
+                //   title: const Text( ('عن التطبيق'),
+                //       style: TextStyle(fontFamily: 'noura')),
+                //   onTap: () {
+                //     // Navigator.of(context).pushReplacementNamed("LoginModel");
+                //   },
+                // ),
 
 
                 ListTile(
