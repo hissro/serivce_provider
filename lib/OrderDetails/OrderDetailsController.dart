@@ -1,15 +1,12 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../Model/OrderServicesModel.dart';
-import '../Model/ServicesModel.dart';
 import '../Utilities/Config.dart';
 import '../Utilities/UserSession.dart';
 import '../Utilities/network_util.dart';
 
 class OrderDetailsController extends GetxController
 {
-
-
 
 
   final NetworkUtil _netUtil = NetworkUtil();
@@ -43,7 +40,7 @@ class OrderDetailsController extends GetxController
 
         for (var i in infos)
         {
-          
+
           var res = OrderServicesModel.fromJson(i);
           Services.add(res);
         }

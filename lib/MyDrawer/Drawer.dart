@@ -6,6 +6,7 @@ import 'package:serivce/Utilities/translations/AppLanguage.dart';
 import '../Categories/Categories.dart';
 import '../Login/Screens/Login/login_screen.dart';
 import '../MyOrder/MyOrder.dart';
+import '../UserProfile/UserProfile.dart';
 import '../Utilities/constants.dart';
 import '../settings/settings.dart';
 
@@ -166,6 +167,7 @@ class _MyDrawerState extends State<MyDrawer>
                   leading: const Icon(Icons.person , color: kPrimaryColor,),
                   title: const Text(('الملف الشخصي') ,style: TextStyle(fontFamily: 'noura')),
                   onTap: () {
+                    Get.to(()=> UserProfile());
                     // Navigator.pushReplacementNamed(context, UserProfile.routeName);
                   },
                 ) :Container(),

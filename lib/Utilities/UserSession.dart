@@ -25,7 +25,7 @@ class UserSession extends GetxController
 
     if (IsLogin)
     {
-      user = getUserInfo();
+      user = UserInfo();
       title = IsLogin ? session.read("user_fullname") : "AWEZO";
       subtitle = IsLogin ? session.read("user_email") : "ايزو للخدمات";
       profilepc = "assets/images/profile.png";
@@ -57,6 +57,18 @@ class UserSession extends GetxController
      );
    }
 
+
+  UserModel UserInfo()
+  {
+
+    return UserModel(
+        user_id:  session.read("user_id"),
+        user_fullname: session.read("user_fullname"),
+        user_email: session.read("user_email"),
+        user_phone: session.read("user_phone") ,
+        IsLogin: session.read("IsLogin")
+    );
+  }
 
 
   Future<bool> IsUserLogin() async
