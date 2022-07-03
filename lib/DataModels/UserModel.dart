@@ -7,6 +7,7 @@ class UserModel
   final String user_fullname;
   final String user_email;
   final String user_phone;
+  final String user_type_id;
   final bool IsLogin;
 
   const UserModel(
@@ -15,6 +16,7 @@ class UserModel
         required this.user_fullname,
         required this.user_email,
         required this.user_phone,
+        required this.user_type_id,
         required this.IsLogin, required
       });
 
@@ -25,6 +27,7 @@ class UserModel
         user_fullname: json["user_fullname"],
         user_email: json["user_email"],
         user_phone:   json["user_phone"],
+        user_type_id:   json["user_type_id"],
         IsLogin : true
     );
   }
