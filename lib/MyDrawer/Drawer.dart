@@ -6,6 +6,7 @@ import 'package:serivce/Utilities/translations/AppLanguage.dart';
 import '../Categories/Categories.dart';
 import '../Login/Screens/Login/login_screen.dart';
 import '../MyOrder/MyOrder.dart';
+import '../MyStore/MyStore.dart';
 import '../UserProfile/UserProfile.dart';
 import '../Utilities/constants.dart';
 import '../settings/settings.dart';
@@ -187,7 +188,7 @@ class _MyDrawerState extends State<MyDrawer>
                   leading: const Icon(Icons.storefront , color: kPrimaryColor,),
                   title: const Text(('متجري') ,style: TextStyle(fontFamily: 'noura')),
                   onTap: () {
-                    Get.to(()=>MyOrder());
+                    Get.to(()=>MyStore());
                     // Navigator.pushReplacementNamed(context, MyBooking.routeName);
                   },
                 ):Container() :Container(),
