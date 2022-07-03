@@ -25,6 +25,7 @@ class Config
   static var AddAppointment = BASE_URL +API_V+ "/add_appointment";
   static var MyAppointments = BASE_URL +API_V+ "/my_appointments";
   static var order_SERVICES = BASE_URL +API_V+ "/appointment_service";
+  static var CheakType = BASE_URL +API_V+ "/cheak_type";
 
 
   /* Other Path */
