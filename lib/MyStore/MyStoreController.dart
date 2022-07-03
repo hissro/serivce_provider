@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../Model/MyOrderModel.dart';
 import '../Utilities/Config.dart';
 import '../Utilities/UserSession.dart';
 import '../Utilities/network_util.dart';
+
 
 class MyStoreController extends GetxController
 {
@@ -15,19 +15,16 @@ class MyStoreController extends GetxController
 
 
 
-  Future<dynamic> GetMybusInfo() async
-  {
-
-      var user_id = session.read("user_id");
-
-       return _netUtil.post(Config.CheakVendor, body:  {  "user_id": "3" }).then((dynamic res)
-       // return _netUtil.post(Config.CheakVendor, body:  {  "user_id": user_id }).then((dynamic res)
-        {
-          return res["data"];
-        }, onError: (e)
-        {
-          print (e);
-        });
+      Future<dynamic> GetMybusInfo() async
+      {
+        var user_id = session.read("user_id");
+         return _netUtil.post(Config.CheakVendor, body:  {  "user_id": user_id }).then((dynamic res)
+          {
+            return res["data"];
+          }, onError: (e)
+          {
+            print (e);
+          });
       }
 
 
@@ -62,7 +59,7 @@ class MyStoreController extends GetxController
       }
 
 
-    }
+  }
 
 
 

@@ -35,7 +35,6 @@ class _MyStoreState extends State<MyStore>
   {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
@@ -49,8 +48,6 @@ class _MyStoreState extends State<MyStore>
       body: Column(
         children: <Widget>
         [
-
-
           FutureBuilder(
             future:  contr.GetMybusInfo(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot)
@@ -382,8 +379,6 @@ class _MyStoreState extends State<MyStore>
               }
             },
           ),
-
-
         ],
       ),
       drawer: MyDrawer(),
