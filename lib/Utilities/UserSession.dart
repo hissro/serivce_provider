@@ -7,6 +7,7 @@ class UserSession extends GetxController
 {
   final session = GetStorage();
   bool IsLogin = false ;
+  String UserType = "0" ;
   String title = "اويزو";
   String subtitle = "ايزو للخدمات";
   String profilepc = "assets/images/logo.png";
@@ -21,6 +22,7 @@ class UserSession extends GetxController
     super.onInit();
 
     IsLogin =  session.read("IsLogin") == null ?  false : session.read("IsLogin");
+    UserType =  session.read("user_type_id") == null ?  "2" : session.read("user_type_id");
 
 
     if (IsLogin)

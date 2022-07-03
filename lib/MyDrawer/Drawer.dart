@@ -173,12 +173,27 @@ class _MyDrawerState extends State<MyDrawer>
                 UserInfo.IsLogin   ?
                 ListTile(
                   leading: const Icon(Icons.favorite_border , color: kPrimaryColor,),
-                  title: const Text(('طلباتي') ,style: TextStyle(fontFamily: 'noura')),
+                  title:   Text(('طلباتي' ) ,style: TextStyle(fontFamily: 'noura')),
                   onTap: () {
                     Get.to(()=>MyOrder());
                     // Navigator.pushReplacementNamed(context, MyBooking.routeName);
                   },
                 ) :Container(),
+
+
+                UserInfo.IsLogin   ?
+                UserInfo.UserType == "3" ?
+                ListTile(
+                  leading: const Icon(Icons.storefront , color: kPrimaryColor,),
+                  title: const Text(('متجري') ,style: TextStyle(fontFamily: 'noura')),
+                  onTap: () {
+                    Get.to(()=>MyOrder());
+                    // Navigator.pushReplacementNamed(context, MyBooking.routeName);
+                  },
+                ):Container() :Container(),
+
+
+
 
 
                 // const ListTile(
