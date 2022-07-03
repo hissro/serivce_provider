@@ -53,7 +53,6 @@ class NetworkUtil
 
   Future<dynamic> post(String url, {body, encoding})
   {
-    // debugPrint('NetworkUtil Body :  ${body}   ::  URL :$url');
 
     return http.post(Uri.parse(url), body: body, headers: {}, encoding: encoding).then((http.Response response)
     {
