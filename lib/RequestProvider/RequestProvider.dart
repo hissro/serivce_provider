@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../Categories/Categories.dart';
 import '../Login/Screens/Login/login_screen.dart';
 import '../Login/components/text_field_container.dart';
+import '../Model/BusinessModel.dart';
 import '../Model/CategoryModel.dart';
 import '../MyDrawer/Drawer.dart';
 import '../Utilities/Config.dart';
@@ -23,22 +24,6 @@ class RequestProvider extends StatefulWidget {
 class _RequestProviderState extends State<RequestProvider>
 {
 
-  /*
-    user_id:4
-    bus_title:Post MAN Store
-    bus_description:This is Post Man Store
-    bus_google_street:Ryadh
-    bus_latitude:2.1111
-    bus_longitude:23.5555
-    bus_contact:16077877
-    bus_logo:logo.png
-    bus_status:0
-    city_id:1
-    country_id:1
-    locality_id:1
-    is_trusted:0
-    buscat:1
-   */
 
   
   TextEditingController  bus_titleController = TextEditingController();
@@ -55,18 +40,73 @@ class _RequestProviderState extends State<RequestProvider>
 
 
   @override
-  void initState() {
+  void initState()
+  {
     // TODO: implement initState
     super.initState();
-
+    CeakVendor ();
     setState(() {
       _load = vcontroller.get_CATEGORY_LIST();
     });
 
   }
 
+
+  void CeakVendor ()
+  {
+    Session.IsUserLogin ().then((isLoginn)
+    {
+      if (isLoginn)
+      {
+        //UserInfo  Session
+        Session.getUserInfo().then((user)
+        {
+          return _netUtil.post(Config.CheakVendor, body:
+          {
+            "user_id":user.user_id.toString(),
+          }).then((dynamic res)
+          {
+            print (' ${res["data"] }');
+            if (res["responce"])
+            {
+
+              if (res["data"]["bus_status"] == 0 )
+                {
+                  showSuccessful(context, 'نأسف لديك متجر غير مفعل الرجاء التواصل مع الادارة للتفعيل');
+                  Future.delayed(const Duration(seconds: 2), ()
+                  {
+                    Get.offAll( ()=> Categories());
+                  });
+                }
+              else
+                {
+                  showSuccessful(context, 'نأسف لديك متجر مفعل بالفعل');
+                  Future.delayed(const Duration(seconds: 2), ()
+                  {
+                    Get.offAll( ()=> Categories());
+                  });
+                }
+            }
+          }, onError: (e)
+          {
+            print (e.toString()  );
+          });
+        });
+      }
+      else
+        {
+          Get.offAll( ()=> LoginScreen());
+        }
+    });
+  }
+
+
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -263,7 +303,8 @@ class _RequestProviderState extends State<RequestProvider>
 
 
             ],
-          )),
+          ),
+      ),
       drawer: MyDrawer(),
     );
   }
@@ -419,6 +460,9 @@ class _RequestProviderState extends State<RequestProvider>
         showAlertDialog(context, 'الرجاء إدخال العنوان');
       }
   }
+
+
+
 
 
 }
