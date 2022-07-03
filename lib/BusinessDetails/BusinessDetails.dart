@@ -1550,6 +1550,9 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       if (snapshot.hasData    )
                       {
 
+                        if (snapshot.data!.length > 0)
+
+
                         return ListView.builder(
                           shrinkWrap: true,
                           itemCount: snapshot.data!.length,
@@ -1624,6 +1627,81 @@ class _BusinessDetailsState extends State<BusinessDetails>
                           },
                         );
 
+
+                        else
+                        return Container(
+                          margin: const EdgeInsets.only(top: 60),
+                          padding: const EdgeInsets.only(right: 15, left: 15),
+                          child:  Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: <Widget>[
+                              // Those are our background
+                              Container(
+                                height: 136,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(22),
+                                  color:  kTextColor ,
+                                  boxShadow: const [kDefaultShadow],
+                                ),
+                                child: Container(
+                                  margin: const EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(22),
+                                  ),
+                                ),
+                              ),
+                              // our product image
+
+                              // Product title and price
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                child: SizedBox(
+                                  height: 136,
+                                  // our image take 200 width, thats why we set out total width - 200
+                                  width: MediaQuery.of(context).size.width ,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      const Spacer(),
+
+                                      Center(
+                                        child: Text(
+                                          'لاتوجد خدمات في المتجر',
+                                          style: Theme.of(context).textTheme.button!.copyWith(fontFamily: 'noura'),
+                                        ),
+                                      ),
+                                      // it use the available space
+                                      const Spacer(),
+
+                                      /*
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding * 1.5, // 30 padding
+                          vertical: kDefaultPadding / 4, // 5 top and bottom
+                        ),
+                        decoration: BoxDecoration(
+                          color: kSecondaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(22),
+                            topRight: Radius.circular(22),
+                          ),
+                        ),
+                        child: Text(
+                          "\$${product.bus_id}",
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                      ),*/
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+
                       } else if (snapshot.connectionState == "active" )
                       {
                         return const Center(
@@ -1632,7 +1710,7 @@ class _BusinessDetailsState extends State<BusinessDetails>
                       }
                       else
                       {
-                        return Container();
+                       return Container();
                       }
                     },
                   ),
