@@ -250,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen>
             "user_password": pass
           }).then((dynamic res)
           {
-             setState(()
+                setState(()
                 {
                   isLogin = false;
                 });

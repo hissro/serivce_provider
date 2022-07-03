@@ -40,7 +40,6 @@ class UserSession extends GetxController
     session.write("user_fullname", User.user_fullname);
     session.write("user_email", User.user_email);
     session.write("user_phone", User.user_phone);
-    session.write("user_type_id", User.user_type_id);
     session.write("IsLogin", true);
   }
 
@@ -54,7 +53,6 @@ class UserSession extends GetxController
          user_fullname: session.read("user_fullname"),
          user_email: session.read("user_email"),
          user_phone: session.read("user_phone") ,
-          user_type_id: session.read("user_type_id") ,
          IsLogin: session.read("IsLogin")
      );
    }
@@ -68,7 +66,6 @@ class UserSession extends GetxController
         user_fullname: session.read("user_fullname"),
         user_email: session.read("user_email"),
         user_phone: session.read("user_phone") ,
-        user_type_id: session.read("user_type_id") ,
         IsLogin: session.read("IsLogin")
     );
   }
@@ -87,17 +84,13 @@ class UserSession extends GetxController
     session.write("user_fullname", null);
     session.write("user_email", null);
     session.write("user_phone",  null );
-    session.write("user_type_id",  null );
     session.write("IsLogin", false);
 
-    // print ('session Log Out : ${session.read("user_fullname")} ');
+    print ('session Log Out : ${session.read("user_fullname")} ');
   }
 
 
 
-  void SetUserType (String user_type_id)
-  {
-    session.write("user_type_id", user_type_id);
-  }
+
 
 }
