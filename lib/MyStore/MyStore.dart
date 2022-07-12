@@ -252,8 +252,8 @@ class _MyStoreState extends State<MyStore>
                                     itemBuilder: (BuildContext ctx, index)
                                     {
                                       var info = snapshot.data![index];
-                                      Color status =  info.status == "0" ? Colors.teal : Colors.yellow;
-                                      String Orstatus =  info.status == "0" ? "مكتمل" : "إنتظار";
+                                      Color status =  info.status == "1" ? Colors.teal : Colors.orange;
+                                      String Orstatus =  info.status == "1" ? "مكتمل" : "إنتظار";
 
                                       return InkWell(
                                         onTap: () {
