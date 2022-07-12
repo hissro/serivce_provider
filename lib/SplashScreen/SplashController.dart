@@ -31,14 +31,7 @@ class SplashController extends GetxController
 
       if (session.read('IsOnBord') == true )
       {
-
         ceak_user_type ();
-
-        // Future.delayed(const Duration(seconds: 3), ()
-        // {
-        //   // Get.to(() => Onboarding());
-        //   Get.to(() => Categories());
-        // });
       }
       else
       {
@@ -79,7 +72,13 @@ class SplashController extends GetxController
             {
               Get.offAll( ()=> Categories());
             });
-          }
+          }else
+            {
+              Future.delayed(const Duration(seconds: 1), ()
+              {
+                Get.offAll( ()=> Categories());
+              });
+            }
         }, onError: (e)
         {
           print (e);
@@ -91,11 +90,7 @@ class SplashController extends GetxController
             Get.offAll( ()=> Categories());
           });
         }
-
-
-
   }
-
 
 }
 

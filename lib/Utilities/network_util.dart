@@ -14,6 +14,7 @@ class NetworkUtil
 
   Future<dynamic> get(String url)
   {
+    print ('get Start ${url}');
     return http.get(Uri.parse(url), headers:
     {
       'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ class NetworkUtil
 
       // print('Res: ${response.body}');
       // print('statusCode: ${response.statusCode}');
-      // debugPrint('NetworkUtil :  $res');
+      debugPrint('NetworkUtil Get :  ${response.body}');
 
       if (statusCode == 200)
       {
@@ -39,7 +40,7 @@ class NetworkUtil
       }
     }, onError: ( e )
     {
-      print (' On Error');
+      print (' On Error  ${e}');
       return
         {
         "responce":false,
@@ -53,13 +54,13 @@ class NetworkUtil
 
   Future<dynamic> post(String url, {body, encoding})
   {
-
+    print ('Post Start  ${body}');
     return http.post(Uri.parse(url), body: body, headers: {}, encoding: encoding).then((http.Response response)
     {
       final String res = response.body;
       final int statusCode = response.statusCode;
 
-      // debugPrint('NetworkUtil :  ${response.body}');
+      debugPrint('NetworkUtil Post :  ${response.body}');
 
       // print( res.toString() );
       if (statusCode < 200)
@@ -74,4 +75,6 @@ class NetworkUtil
       return e;
     });
   }
+
+
 }

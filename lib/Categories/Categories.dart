@@ -42,7 +42,6 @@ class _CategoriesState extends State<Categories>
   {
     List<Category> cats = [];
 
-    print (' Start Loading ');
     return _netUtil.get(Config.CATEGORY_LIST).then((dynamic data)
     {
       var responce = data["responce"];
@@ -61,7 +60,7 @@ class _CategoriesState extends State<Categories>
       return cats;
     }, onError: (e)
     {
-      print(e.toString());
+      print(e);
       return cats;
     });
   }

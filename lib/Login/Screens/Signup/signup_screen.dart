@@ -133,7 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                 hintText:  ('الاسم').tr,
                 icon: Icons.person ,
                 controllerval: user_fullname,
-                keybord : TextInputType.number, onChanged: (String value) {  },
+                // keybord : TextInputType.number,
+                onChanged: (String value) {  },
               ),
 
 

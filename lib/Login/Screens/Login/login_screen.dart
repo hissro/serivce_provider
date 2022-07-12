@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen>
               TextFieldContainer(
                 child: TextField(
                   controller: _email,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   style: TextStyle(
                       fontFamily: 'noura', color: KBlack),
                   cursorColor: kPrimaryColor,

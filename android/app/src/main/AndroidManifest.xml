@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.hissro.serivce">
-   <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
         android:label="اويزو"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
