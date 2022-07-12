@@ -8,7 +8,9 @@ import '../Utilities/Functions.dart';
 import '../Utilities/constants.dart';
 import 'MyOrderController.dart';
 
-class MyOrder extends StatelessWidget {
+class MyOrder extends StatelessWidget
+{
+
   var controller = Get.put(MyOrderController());
 
   @override

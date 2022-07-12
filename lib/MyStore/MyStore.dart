@@ -12,8 +12,6 @@ import '../Utilities/Functions.dart';
 import '../Utilities/UserSession.dart';
 import '../Utilities/constants.dart';
 
-
-
 class MyStore extends StatefulWidget
 {
   const MyStore({Key? key}) : super(key: key);
